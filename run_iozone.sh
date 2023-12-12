@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# Mount volumes in apps.
+# Run iozone.
 cfg=config.inc
 
 set -e
