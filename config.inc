@@ -9,9 +9,9 @@ export IRODS_ZONE=iplant
 export IRODS_USER=
 export IRODS_PASSWORD=
 
-export IRODSFS_PV_NAME=irodsfs-overlayfs-pv
-export IRODSFS_PVC_NAME=irodsfs-overlayfs-pvc
-export IRODSFS_PV_ID=irodsfs-overlayfs-volid
+export IRODSFS_PV_NAME=irodsfs-pv
+export IRODSFS_PVC_NAME=irodsfs-pvc
+export IRODSFS_PV_ID=irodsfs-volid
 
 export IRODSFS_OVERLAYFS_PV_NAME=irodsfs-overlayfs-pv
 export IRODSFS_OVERLAYFS_PVC_NAME=irodsfs-overlayfs-pvc
