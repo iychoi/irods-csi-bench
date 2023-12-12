@@ -7,7 +7,7 @@ spec:
   - name: app
     image: acrelle/iozone
     command: ["/usr/bin/iozone"]
-    args: ["-e", "-I", "-l", "1", "-u", "1", "-a", "-s", "100M", "-r", "4k", "-i", "0", "-i", "1", "-i", "2", "-T", "-F", "/mount/bench.tmp"]
+    args: ["-e", "-I", "-l", "1", "-u", "1", "-a", "-s", "100M", "-r", "4k", "-i", "0", "-i", "1", "-i", "2", "-F", "/mount/bench.tmp"]
     volumeMounts:
     - name: persistent-storage
       mountPath: /mount
