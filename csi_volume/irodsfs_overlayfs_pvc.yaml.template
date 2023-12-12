@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: $IRODSFS_OVERLAYFS_PVC_NAME
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: irods-sc
+  selector:
+    matchLabels:
+      vol-name: $IRODSFS_OVERLAYFS_PV_NAME
+  resources:
+    requests:
+      storage: 5Gi

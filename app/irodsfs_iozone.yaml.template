@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: $IOZONE_NAME
+spec:
+  containers:
+  - name: app
+    image: acrelle/iozone
+    command: ["-e", "-I", "-a", "-s", "100M", "-r", "4k", "-i", "0", "-i", "1", "-i", "2", "-F", "/mount/bench.tmp"]
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /mount
+  restartPolicy: Never
+  volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: $IRODSFS_PVC_NAME
