@@ -6,8 +6,11 @@ spec:
   containers:
   - name: app
     image: $BENCHMARK_IMAGE
-    command: ["/bin/bash"]
-    args: ["-c" "/usr/bin/time git clone https://github.com/cyverse/go-irodsclient.git /mount/bench_fuseoverlayfs_go_irodsclient ; rm -rf /mount/bench_fuseoverlayfs_go_irodsclient"]
+    command: ["/bin/sh", "-c"]
+    args:
+    - |
+      time git clone https://github.com/cyverse/go-irodsclient.git /mount/bench_fuseoverlayfs_go_irodsclient
+      rm -rf /mount/bench_fuseoverlayfs_go_irodsclient
     volumeMounts:
     - name: persistent-storage
       mountPath: /mount
