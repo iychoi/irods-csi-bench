@@ -6,7 +6,7 @@ spec:
   containers:
   - name: app
     image: $BENCHMARK_IMAGE
-    command: ["time"]
+    command: ["/usr/bin/time"]
     args: ["git", "clone", "https://github.com/cyverse/go-irodsclient.git", "/mount/bench_go_irodsclient"]
     volumeMounts:
     - name: persistent-storage

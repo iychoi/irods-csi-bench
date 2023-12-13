@@ -4,6 +4,6 @@ LABEL maintainer="iychoi@arizona.edu"
 ENV GIT_SSL_NO_VERIFY=1
 
 RUN apt-get update && \
-      apt-get install --no-install-recommends -y --quiet=2 iozone3 git && \
+      apt-get install --no-install-recommends -y --quiet=2 iozone3 git time && \
       rm -rf /var/lib/apt/lists/*
 
