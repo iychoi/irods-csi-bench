@@ -49,11 +49,11 @@ main()
     echo "running iozone with iRODS FUSE Lite"
     expand_tmpl $baseDir/app/irodsfs_iozone.yaml.template | kubectl apply -f -
     echo "wait for the pod to become ready"
-    kubectl wait --timeout=60s --for=condition=ready pod pod/$IOZONE_NAME
+    kubectl wait --timeout=60s --for=condition=ready pod/$IOZONE_NAME
     if [$? -eq 0]
     then
         echo "wait for the pod to complete iozone benchmark"
-        kubectl wait --timeout=-1s --for=condition=ready=False pod pod/$IOZONE_NAME
+        kubectl wait --timeout=-1s --for=condition=ready=False pod/$IOZONE_NAME
     else
         echo "timeout"
         return -1
@@ -62,11 +62,11 @@ main()
     echo "running iozone with iRODS FUSE Lite + OverlayFS"
     expand_tmpl $baseDir/app/irodsfs_overlayfs_iozone.yaml.template | kubectl apply -f -
     echo "wait for the pod to become ready"
-    kubectl wait --timeout=60s --for=condition=ready pod pod/$IOZONE_OVERLAYFS_NAME
+    kubectl wait --timeout=60s --for=condition=ready pod/$IOZONE_OVERLAYFS_NAME
     if [$? -eq 0]
     then
         echo "wait for the pod to complete iozone benchmark"
-        kubectl wait --timeout=-1s --for=condition=ready=False pod pod/$IOZONE_OVERLAYFS_NAME
+        kubectl wait --timeout=-1s --for=condition=ready=False pod/$IOZONE_OVERLAYFS_NAME
     else 
         echo "timeout"
         return -1
@@ -75,11 +75,11 @@ main()
     echo "running iozone with iRODS FUSE Lite + Fuse-OverlayFS"
     expand_tmpl $baseDir/app/irodsfs_fuseoverlayfs_iozone.yaml.template | kubectl apply -f -
     echo "wait for the pod to become ready"
-    kubectl wait --timeout=60s --for=condition=ready pod pod/$IOZONE_FUSEOVERLAYFS_NAME
+    kubectl wait --timeout=60s --for=condition=ready pod/$IOZONE_FUSEOVERLAYFS_NAME
     if [$? -eq 0]
     then
         echo "wait for the pod to complete iozone benchmark"
-        kubectl wait --timeout=-1s --for=condition=ready=False pod pod/$IOZONE_FUSEOVERLAYFS_NAME
+        kubectl wait --timeout=-1s --for=condition=ready=False pod/$IOZONE_FUSEOVERLAYFS_NAME
     else
         echo "timeout"
         return -1
