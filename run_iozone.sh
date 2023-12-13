@@ -48,13 +48,13 @@ main()
     # iozone
     expand_tmpl $baseDir/app/irodsfs_iozone.yaml.template | kubectl apply -f -
     # need to adjust timeout
-    kubectl wait --timeout=7200s --for=condition=Completed pod/$IOZONE_NAME
+    kubectl wait --timeout=7200s --for=condition=complete pod/$IOZONE_NAME
 
     expand_tmpl $baseDir/app/irodsfs_overlayfs_iozone.yaml.template | kubectl apply -f -
-    kubectl wait --timeout=7200s --for=condition=Completed pod/$IOZONE_OVERLAYFS_NAME
+    kubectl wait --timeout=7200s --for=condition=complete pod/$IOZONE_OVERLAYFS_NAME
 
     expand_tmpl $baseDir/app/irodsfs_fuseoverlayfs_iozone.yaml.template | kubectl apply -f -
-    kubectl wait --timeout=7200s --for=condition=Completed pod/$IOZONE_FUSEOVERLAYFS_NAME
+    kubectl wait --timeout=7200s --for=condition=complete pod/$IOZONE_FUSEOVERLAYFS_NAME
 }
 
 
