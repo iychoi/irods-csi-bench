@@ -46,15 +46,46 @@ main()
     . "$baseDir/$cfg"
 
     # iozone
+    echo "running iozone with iRODS FUSE Lite"
     expand_tmpl $baseDir/app/irodsfs_iozone.yaml.template | kubectl apply -f -
-    # need to adjust timeout
-    kubectl wait --timeout=7200s --for=condition=complete pod/$IOZONE_NAME
+    echo "wait for the pod to become ready"
+    kubectl wait --timeout=60s --for=condition=ready pod pod/$IOZONE_NAME
+    if [$? -eq 0]
+    then
+        echo "wait for the pod to complete iozone benchmark"
+        kubectl wait --timeout=-1s --for=condition=ready=False pod pod/$IOZONE_NAME
+    else
+        echo "timeout"
+        return -1
+    fi
 
+    echo "running iozone with iRODS FUSE Lite + OverlayFS"
     expand_tmpl $baseDir/app/irodsfs_overlayfs_iozone.yaml.template | kubectl apply -f -
-    kubectl wait --timeout=7200s --for=condition=complete pod/$IOZONE_OVERLAYFS_NAME
-
+    echo "wait for the pod to become ready"
+    kubectl wait --timeout=60s --for=condition=ready pod pod/$IOZONE_OVERLAYFS_NAME
+    if [$? -eq 0]
+    then
+        echo "wait for the pod to complete iozone benchmark"
+        kubectl wait --timeout=-1s --for=condition=ready=False pod pod/$IOZONE_OVERLAYFS_NAME
+    else 
+        echo "timeout"
+        return -1
+    fi
+    
+    echo "running iozone with iRODS FUSE Lite + Fuse-OverlayFS"
     expand_tmpl $baseDir/app/irodsfs_fuseoverlayfs_iozone.yaml.template | kubectl apply -f -
-    kubectl wait --timeout=7200s --for=condition=complete pod/$IOZONE_FUSEOVERLAYFS_NAME
+    echo "wait for the pod to become ready"
+    kubectl wait --timeout=60s --for=condition=ready pod pod/$IOZONE_FUSEOVERLAYFS_NAME
+    if [$? -eq 0]
+    then
+        echo "wait for the pod to complete iozone benchmark"
+        kubectl wait --timeout=-1s --for=condition=ready=False pod pod/$IOZONE_FUSEOVERLAYFS_NAME
+    else
+        echo "timeout"
+        return -1
+    fi
+
+    return 0
 }
 
 
