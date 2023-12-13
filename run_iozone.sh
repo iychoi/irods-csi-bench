@@ -31,7 +31,7 @@ expand_tmpl()
     cat <<EOF | sed --file - "$1"
 s/\$IRODSFS_PVC_NAME/$(escape $IRODSFS_PVC_NAME)/g
 s/\$IRODSFS_OVERLAYFS_PVC_NAME/$(escape $IRODSFS_OVERLAYFS_PVC_NAME)/g
-s/\$IRODSFS_OVERLAYFS_PVC_NAME/$(escape $IRODSFS_FUSEOVERLAYFS_PVC_NAME)/g
+s/\$IRODSFS_FUSEOVERLAYFS_PVC_NAME/$(escape $IRODSFS_FUSEOVERLAYFS_PVC_NAME)/g
 
 s/\$IOZONE_NAME/$(escape $IOZONE_NAME)/g
 s/\$IOZONE_OVERLAYFS_NAME/$(escape $IOZONE_OVERLAYFS_NAME)/g
@@ -47,13 +47,14 @@ main()
 
     # iozone
     expand_tmpl $baseDir/app/irodsfs_iozone.yaml.template | kubectl apply -f -
-    kubectl wait --for=condition=Completed pod/$IOZONE_NAME
+    # need to adjust timeout
+    kubectl wait --timeout=7200s --for=condition=Completed pod/$IOZONE_NAME
 
     expand_tmpl $baseDir/app/irodsfs_overlayfs_iozone.yaml.template | kubectl apply -f -
-    kubectl wait --for=condition=Completed pod/$IOZONE_OVERLAYFS_NAME
+    kubectl wait --timeout=7200s --for=condition=Completed pod/$IOZONE_OVERLAYFS_NAME
 
     expand_tmpl $baseDir/app/irodsfs_fuseoverlayfs_iozone.yaml.template | kubectl apply -f -
-    kubectl wait --for=condition=Completed pod/$IOZONE_FUSEOVERLAYFS_NAME
+    kubectl wait --timeout=7200s --for=condition=Completed pod/$IOZONE_FUSEOVERLAYFS_NAME
 }
 
 
