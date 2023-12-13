@@ -6,8 +6,8 @@ spec:
   containers:
   - name: app
     image: $BENCHMARK_IMAGE
-    command: ["git"]
-    args: ["clone", "https://github.com/cyverse/go-irodsclient.git", "/mount/bench_go_irodsclient"]
+    command: ["time"]
+    args: ["git", "clone", "https://github.com/cyverse/go-irodsclient.git", "/mount/bench_go_irodsclient"]
     volumeMounts:
     - name: persistent-storage
       mountPath: /mount
