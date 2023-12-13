@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: $IOZONE_FUSEOVERLAYFS_NAME
+  name: $GIT_NAME
 spec:
   containers:
   - name: app
     image: $BENCHMARK_IMAGE
-    command: ["iozone"]
-    args: ["-e", "-I", "-l", "1", "-u", "1", "-s", "100M", "-r", "4k", "-i", "0", "-i", "1", "-i", "2", "-F", "/mount/bench_fuseoverlayfs.tmp"]
+    command: ["git"]
+    args: ["clone", "https://github.com/cyverse/go-irodsclient.git", "/mount/bench_go_irodsclient"]
     volumeMounts:
     - name: persistent-storage
       mountPath: /mount
@@ -15,4 +15,4 @@ spec:
   volumes:
   - name: persistent-storage
     persistentVolumeClaim:
-      claimName: $IRODSFS_FUSEOVERLAYFS_PVC_NAME
+      claimName: $IRODSFS_PVC_NAME
