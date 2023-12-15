@@ -34,14 +34,6 @@ main()
     mkdir -p ~/.kube
     sudo k3s kubectl config view --raw | tee ~/.kube/config
     chmod 600 ~/.kube/config
-
-    # install helm
-    curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-
-    # irods-csi-driver
-    helm repo add irods-csi-driver-repo https://cyverse.github.io/irods-csi-driver-helm/
-    helm repo update
-    helm install irods-csi-driver irods-csi-driver-repo/irods-csi-driver
 }
 
 
